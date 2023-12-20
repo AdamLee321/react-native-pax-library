@@ -21,19 +21,22 @@ export default {
 	magCardIsSwiped() {
 		return Pax.magCardIsSwiped();
 	},
-    	openMagReader() {
-        	Pax.openMagReader();
-    	},
-    	readFromMagReader() {
-        	return Pax.readFromMagReader();
-    	},
-    	readExtFromMagReader() {
-        	return Pax.readExtFromMagReader();
-    	},
-    	resetMagReader() {
-        	Pax.resetMagReader();
-    	},
-    	setupMagReader(flag) {
-        	Pax.setupMagReader(flag);
-    	},
+	openMagReader() {
+		Pax.openMagReader();
+	},
+	readFromMagReader() {
+		return Pax.readFromMagReader();
+	},
+	readExtFromMagReader() {
+		return Pax.readExtFromMagReader();
+	},
+	resetMagReader() {
+		Pax.resetMagReader();
+	},
+	setupMagReader(flag) {
+		Pax.setupMagReader(flag);
+	},
+	pollCardReader(timeout){
+		return Pax.pollCardReader(timeout);
+	}
 };
