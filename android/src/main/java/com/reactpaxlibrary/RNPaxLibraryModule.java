@@ -154,4 +154,24 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
             throw new RuntimeException(e);
         }
     }
+
+    @ReactMethod
+    public void pollCardReader(int timeout, Promise promise) {
+        try {
+            // Use the cardReaderHelper to poll for a bank card
+            PollingResult result = cardReaderHelper.polling(EReaderType.MAG, timeout, true);
+
+            // Process the polling result
+            WritableMap resultMap = Arguments.createMap();
+            resultMap.putString("track1", result.getTrack1());
+            resultMap.putString("track2", result.getTrack2());
+            resultMap.putString("track3", result.getTrack3());
+            resultMap.putDouble("cardType", result.getCardType());
+            resultMap.putString("readerType", result.getReaderType().toString());
+
+            promise.resolve(resultMap);
+        } catch (MagDevException | IccDevException | PiccDevException e) {
+            promise.reject("ERROR", e.getMessage());
+        }
+    }
 }
