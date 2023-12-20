@@ -9,10 +9,15 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.pax.dal.ICashDrawer;
 import com.pax.dal.IDAL;
+import com.pax.dal.ICardReaderHelper;
 import com.pax.dal.IMag;
 import com.pax.dal.IPrinter;
+import com.pax.dal.entity.EReaderType;
+import com.pax.dal.entity.PollingResult;
 import com.pax.dal.entity.TrackData;
+import com.pax.dal.exceptions.IccDevException;
 import com.pax.dal.exceptions.MagDevException;
+import com.pax.dal.exceptions.PiccDevException;
 import com.pax.neptunelite.api.NeptuneLiteUser;
 import android.graphics.Bitmap;
 import androidmads.library.qrgenearator.QRGContents;
@@ -28,6 +33,8 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
     private IPrinter printer;
     private ICashDrawer cashDrawer;
 
+    private ICardReaderHelper cardReaderHelper;
+
     public RNPaxLibraryModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -36,6 +43,7 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
             dal = NeptuneLiteUser.getInstance().getDal(reactContext);
             mag = dal.getMag();
             printer = dal.getPrinter();
+            cardReaderHelper = dal.getCardReaderHelper();
             cashDrawer = dal.getCashDrawer();
         } catch (Exception e) {
             e.printStackTrace();
