@@ -123,7 +123,7 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void reset() {
+    public void resetCardReader() {
         // This method can be used to reset magnetic stripe card reader, and clear buffer of magnetic stripe card.
         try {
             mag.reset();
