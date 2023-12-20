@@ -19,8 +19,8 @@ export default {
         	Pax.closeMagReader();
 	},
 	magCardIsSwiped() {
-        	return Pax.MagCardisSwiped();
-    	},
+		return Pax.magCardIsSwiped();
+	},
     	openMagReader() {
         	Pax.openMagReader();
     	},
