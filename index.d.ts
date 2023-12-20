@@ -6,7 +6,7 @@ declare var Pax: {
 	openDrawer: () => Promise<any>;
 	printBitmap: (inputValue: string, smallerDimension: number) => void;
 	closeMagReader: () => void;
-	magCardisSwiped: () => boolean;
+	magCardIsSwiped: () => boolean;
 	openMagReader: () => void;
 	readFromMagReader: () => any;
 	readExtFromMagReader: () => any;
