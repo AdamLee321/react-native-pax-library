@@ -15,4 +15,16 @@ export default {
 	printBitmap(inputValue, smallerDimension) {
 		Pax.printBitmap(inputValue, smallerDimension);
 	},
+	setCardSwipeListener(callback) {
+		DeviceEventEmitter.addListener('onCardSwiped', cardData => {
+		callback && callback(cardData);
+		});
+		Pax.setCardSwipeListener();
+	},
+	readCard() {
+		return Pax.readCard();
+	},
+	resetCardReader(){
+		return Pax.resetCardReader();
+	}
 };
