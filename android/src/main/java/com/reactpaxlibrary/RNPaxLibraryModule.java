@@ -23,6 +23,7 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
 
     private static final String NAME = "Pax";
     private final ReactApplicationContext reactContext;
+    private QRGEncoder qrgEncoder;
     private IDAL dal;
     private IMag mag;
     private IPrinter printer;
