@@ -15,16 +15,25 @@ export default {
 	printBitmap(inputValue, smallerDimension) {
 		Pax.printBitmap(inputValue, smallerDimension);
 	},
-	setCardSwipeListener(callback) {
-		DeviceEventEmitter.addListener('onCardSwiped', cardData => {
-		callback && callback(cardData);
-		});
-		Pax.setCardSwipeListener();
+	closeMagReader() {
+        	Pax.closeMagReader();
 	},
-	readCard() {
-		return Pax.readCard();
-	},
-	resetCardReader(){
-		return Pax.resetCardReader();
-	}
+	magCardisSwiped() {
+        	return Pax.MagCardisSwiped();
+    	},
+    	openMagReader() {
+        	Pax.openMagReader();
+    	},
+    	readFromMagReader() {
+        	return Pax.readFromMagReader();
+    	},
+    	readExtFromMagReader() {
+        	return Pax.readExtFromMagReader();
+    	},
+    	resetMagReader() {
+        	Pax.resetMagReader();
+    	},
+    	setupMagReader(flag) {
+        	Pax.setupMagReader(flag);
+    	},
 };
