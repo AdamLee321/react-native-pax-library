@@ -8,10 +8,11 @@ declare var Pax: {
 	closeMagReader: () => void;
 	magCardIsSwiped: () => boolean;
 	openMagReader: () => void;
-	readFromMagReader: () => any;
+	readFromMagReader: () => Promise<any>;
 	readExtFromMagReader: () => any;
 	resetMagReader: () => void;
 	setupMagReader: (flag: number) => void;
+	pollCardReader: (timeout: number) => Promise<any>;
 };
 
 export default Pax;
