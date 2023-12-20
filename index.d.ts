@@ -5,9 +5,13 @@ declare var Pax: {
 	printStr: (text: string, cutMode?: number) => void;
 	openDrawer: () => Promise<any>;
 	printBitmap: (inputValue: string, smallerDimension: number) => void;
-	setCardSwipeListener: (callback: (cardData: any) => void) => void;
-	readCard: () => void;
-	resetCardReader: () => void;
+	closeMagReader: () => void;
+	magCardisSwiped: () => boolean;
+	openMagReader: () => void;
+	readFromMagReader: () => any;
+	readExtFromMagReader: () => any;
+	resetMagReader: () => void;
+	setupMagReader: (flag: number) => void;
 };
 
 export default Pax;
