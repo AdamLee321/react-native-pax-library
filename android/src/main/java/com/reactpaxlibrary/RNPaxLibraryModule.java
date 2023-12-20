@@ -1,10 +1,12 @@
 
 package com.reactpaxlibrary;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
 import com.pax.dal.ICashDrawer;
 import com.pax.dal.IDAL;
 import com.pax.dal.IMag;
@@ -110,11 +112,19 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public TrackData readFromMagReader() {
+    public void readFromMagReader(Promise promise) {
         try {
-            return mag.read();
+            TrackData data = mag.read();
+
+            WritableMap trackDataMap = Arguments.createMap();
+            trackDataMap.putString("track1", data.getTrack1());
+            trackDataMap.putString("track2", data.getTrack2());
+            trackDataMap.putString("track3", data.getTrack3());
+            trackDataMap.putString("track4", data.getTrack4());
+            trackDataMap.putInt("resultCode", data.getResultCode());
+            promise.resolve(trackDataMap);
         } catch (MagDevException e) {
-            throw new RuntimeException(e);
+            promise.reject("ERROR", e.getMessage());
         }
     }
 
