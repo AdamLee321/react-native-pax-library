@@ -5,9 +5,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.Arguments;
 import com.pax.dal.ICashDrawer;
 import com.pax.dal.IDAL;
 import com.pax.dal.IMag;
@@ -86,47 +83,63 @@ public class RNPaxLibraryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setCardSwipeListener() {
+    public void closeMagReader() {
         try {
-            mag.open();
-
-            // Check if the card is swiped
-            if (mag.isSwiped()) {
-                TrackData cardData = mag.read();
-
-                // Create a dictionary to store track data components
-                WritableMap trackDataMap = Arguments.createMap();
-                trackDataMap.putString("track1", cardData.getTrack1());
-                trackDataMap.putString("track2", cardData.getTrack2());
-                trackDataMap.putString("track3", cardData.getTrack3());
-                trackDataMap.putString("track4", cardData.getTrack4());
-
-                // Emit an event to React Native with card data
-                getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                        .emit("onCardSwiped",trackDataMap);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                mag.close();
-            } catch (MagDevException e) {
-                throw new RuntimeException(e);
-            }
+            mag.close();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @ReactMethod
-    public void readCard() {
-        // This method can be used independently if you want to manually trigger card reading.
-        setCardSwipeListener();
+    public boolean magCardIsSwiped() {
+        try {
+            return mag.isSwiped();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @ReactMethod
-    public void resetCardReader() {
-        // This method can be used to reset magnetic stripe card reader, and clear buffer of magnetic stripe card.
+    public void openMagReader() {
+        try {
+            mag.open();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ReactMethod
+    public TrackData readFromMagReader() {
+        try {
+            return mag.read();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ReactMethod
+    public TrackData readExtFromMagReader() {
+        try {
+            return mag.readExt();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ReactMethod
+    public void resetMagReader() {
         try {
             mag.reset();
+        } catch (MagDevException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ReactMethod
+    public void setupMagReader(byte flag) {
+        try {
+            mag.setup(flag);
         } catch (MagDevException e) {
             throw new RuntimeException(e);
         }
